@@ -9,6 +9,7 @@ cv = pickle.load(open('count_vectorizer.pkl', 'rb'))
 
 app = Flask(__name__)
 cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -31,4 +32,4 @@ def predict():
     return jsonify(response)
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
+    app.run(host="0.0.0.0", port=8080)
