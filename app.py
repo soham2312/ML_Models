@@ -2,12 +2,14 @@ from flask import Flask, request, jsonify
 import pickle
 import os
 from sklearn.feature_extraction.text import CountVectorizer
-
+from flask_cors import CORS
 # Load the trained model and CountVectorizer
 model = pickle.load(open('fitted_model.pkl', 'rb'))
 cv = pickle.load(open('count_vectorizer.pkl', 'rb'))
 
 app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 @app.route('/predict', methods=['POST'])
 def predict():
